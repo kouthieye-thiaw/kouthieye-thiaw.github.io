@@ -58,7 +58,7 @@
         <a class="irow__link" href="#projet-${p.id}" data-open="${p.id}" data-preview="${p.id}">
           <span class="irow__in">
             <span class="irow__n mono">${pad(i + 1)}</span>
-            <span class="irow__title">${esc(p.title)}${p.isNew ? '<em>nouveau</em>' : ''}</span>
+            <span class="irow__title">${esc(p.title)}${p.isNew ? '<em>nouveau</em>' : ''}${p.wip ? '<em>en cours</em>' : ''}</span>
             <span class="irow__frame">${esc(p.frame)}</span>
             <span class="irow__year mono">${p.year}</span>
             <span class="irow__arrow">${ARROW}</span>
@@ -820,6 +820,26 @@
     return { stop: () => { run++; io.disconnect(); } };
   }
 
+  /* ---------- Extraits de code (coloration C / Arduino) ---------- */
+  const C_TOK = /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*")|(#\w+)|\b(void|bool|uint8_t|uint16_t|uint32_t|const|if|else|for|return|typedef|struct)\b|\b(0x[0-9A-Fa-f]+|\d+(?:UL)?)\b/g;
+  const hlC = s => {
+    let out = '', last = 0;
+    s.replace(C_TOK, (m, com, str, pre, kw, num, at) => {
+      out += esc(s.slice(last, at));
+      const cls = com ? 'com' : str ? 'str' : pre ? 'pre' : kw ? 'kw' : 'num';
+      out += `<span class="${cls}">${esc(m)}</span>`;
+      last = at + m.length;
+      return m;
+    });
+    return out + esc(s.slice(last));
+  };
+  const codeHTML = c => `
+    <figure class="code" data-cr>
+      <div class="term__bar"><i></i><i></i><i></i><span class="mono">robot2wd.ino — ${esc(c.file)}</span></div>
+      <pre class="code__body mono"><code>${hlC(c.src)}</code></pre>
+      <figcaption class="code__cap mono">${esc(c.label)}</figcaption>
+    </figure>`;
+
   /* ---------- Étude de cas (fenêtre projet) ---------- */
   const caseEl = $('#case'), caseScroll = $('.case__scroll'), caseContent = $('.case__content'), caseBar = $('.case__bar');
   let caseOpen = false, caseIdx = -1, lastFocus = null, caseCleanup = [];
@@ -835,7 +855,7 @@
       </div>`).join('');
     return `
       <header class="case__head wrap">
-        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(CATS[p.cat] || '')}</span>${p.isNew ? '<span class="badge-new mono">nouveau · BUT 3</span>' : ''}</p>
+        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(CATS[p.cat] || '')}</span>${p.isNew ? '<span class="badge-new mono">nouveau · BUT 3</span>' : ''}${p.wip ? '<span class="badge-new mono">en cours</span>' : ''}</p>
         <h2 class="case__title" id="case-title">${esc(p.title)}</h2>
         <dl class="case__meta">
           <div><dt>année</dt><dd>${esc(p.year)}</dd></div>
@@ -859,6 +879,7 @@
           <h3 data-cr>acquis</h3>
           <div class="tags" data-cr>${tags(p.skills)}</div>
           ${figs ? `<h3 data-cr>outils</h3><div class="tags" data-cr>${tags(p.tools)}</div>` : ''}
+          ${p.code ? `<h3 data-cr>extraits de code</h3>${p.code.map(codeHTML).join('')}${p.codeNote ? `<p class="code__note" data-cr>${esc(p.codeNote)}</p>` : ''}` : ''}
           ${p.terminal ? `<h3 data-cr>démo</h3><div class="term case__term" data-cr>${TERM_BAR}</div>` : ''}
           ${p.docs && p.docs.length ? `<h3 data-cr>documents</h3><div class="case__docs" data-cr>${p.docs.map(d => `
             <a class="pill" href="${esc(d.href)}" target="_blank" rel="noopener"><span class="pill__icon">${ARROW}${ARROW}</span><span data-roll>${esc(d.label)}</span></a>`).join('')}</div>` : ''}

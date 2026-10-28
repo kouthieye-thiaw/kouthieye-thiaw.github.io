@@ -32,6 +32,33 @@ window.PROJECTS = [
     ]
   },
   {
+    id: 'linfan', featured: true, cat: 'perso',
+    title: 'Linfan — mon IA privée, 100 % locale',
+    short: 'Un assistant IA qui tourne entièrement sur mon PC : modèle Qwen 3.6 35B, mémoire longue, et des outils pour lire, chercher et ranger mes fichiers.',
+    year: '2026', frame: 'Projet personnel', duration: 'Octobre 2026', role: 'Conception, configuration et interface',
+    cover: 'ia-1', coverFit: 'contain', alt: 'Accueil de Linfan : « Salut Kouthieye ! », suggestions et zone de saisie',
+    images: ['ia-1', 'ia-2', 'ia-3', 'ia-4', 'ia-5'],
+    figures: [
+      { v: 35, u: 'Md', l: 'de paramètres : le modèle Qwen 3.6, exécuté en local avec Ollama' },
+      { v: 0, u: '', l: 'donnée envoyée en ligne : tout reste sur le PC' },
+      { v: 62, u: 'Go', l: 'de RAM sur le portable qui fait tourner le modèle' }
+    ],
+    context: 'En dehors de l’IUT, je m’intéresse aux nouvelles technologies et à la façon d’y appliquer l’IA. Je voulais un assistant qui m’aide vraiment au quotidien (cours, électronique, candidatures, documents) sans envoyer mes données personnelles sur les serveurs d’un service en ligne. D’où Linfan : une IA qui tourne entièrement sur mon ordinateur, que j’ai choisie, configurée et dotée de sa propre interface pour qu’elle travaille pour moi.',
+    missions: [
+      'Choisir le modèle : Qwen 3.6 35B, assez puissant pour raisonner, expliquer un circuit ou rédiger en français, tout en tenant dans la mémoire de mon PC',
+      'L’installer et le servir en local avec Ollama, accessible uniquement depuis la machine (127.0.0.1)',
+      'Écrire ses consignes : répondre en français, ne jamais rien envoyer en ligne, ne jamais supprimer un fichier (corbeille à la place), demander confirmation avant toute action importante, ne jamais inventer un chiffre',
+      'Lui donner une mémoire longue : « retiens que… » ajoute une ligne datée dans un fichier de mémoire, « résume la conversation » écrit un journal',
+      'Développer son interface en Python, sans dépendance : conversations, mode réflexion, pièces jointes PDF et Word, lancement comme une application avec la commande linfan',
+      'Lui donner des outils : chercher un fichier dans un index du disque (SQLite), lire un document, regarder une image, proposer un plan de rangement que je valide',
+      'Ajouter des missions autonomes : de gros chantiers (ranger tout un dossier) qu’elle mène seule, avec un journal pour tout annuler',
+      'Brancher aussi un mode agent (OpenCode) sur le même modèle, avec une permission à valider pour chaque modification'
+    ],
+    skills: ['IA générative', 'LLM en local', 'Prompt système', 'Python', 'Conception d’interface', 'Protection des données', 'Autonomie'],
+    tools: ['Ollama', 'Qwen 3.6 35B', 'Python', 'SQLite', 'OpenCode', 'HTML / CSS / JavaScript', 'Linux'],
+    docs: []
+  },
+  {
     id: 'sql', featured: false, cat: 'data', isNew: true,
     title: 'Base de données Northwind — SQL & Python',
     short: 'Administrer une base MySQL, écrire requêtes et vues, puis les exploiter dans un script Python.',
@@ -419,6 +446,7 @@ window.PROJECTS = [
 
 window.PROJECT_CATS = {
   all: 'Tous',
+  perso: 'Projets perso',
   elec: 'Électronique',
   rf: 'RF & signal',
   embed: 'Embarqué',

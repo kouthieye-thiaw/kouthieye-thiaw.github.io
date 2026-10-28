@@ -461,6 +461,13 @@ body.ember-elsewhere .nav__cta { background: var(--fg); color: var(--bg); }
 .term__body .cmd { color: var(--bone); }
 .term__body .kw { color: var(--bone); font-weight: 500; }
 .term__body .hl { color: var(--ember); }
+.code { margin: 0 0 16px; border-radius: var(--r-card); overflow: hidden; background: var(--ink); color: var(--mist); border: 1px solid var(--ink); }
+.code__body { margin: 0; max-height: 420px; overflow: auto; scrollbar-color: rgba(252, 251, 248, .3) transparent; padding: 18px 20px; font-size: 13px; line-height: 1.55; white-space: pre; color: var(--mist); }
+.code__body .kw, .code__body .pre { color: var(--bone); font-weight: 500; }
+.code__body .com { color: rgba(252, 251, 248, .45); font-style: italic; }
+.code__body .num, .code__body .str { color: var(--ember); }
+.code__cap { display: block; padding: 10px 20px 14px; border-top: 1px solid rgba(252, 251, 248, .12); color: rgba(252, 251, 248, .6); font-size: 13px; }
+.code__note { margin-top: 4px; color: var(--muted); }
 .term__caret { display: inline-block; width: .6em; height: 1.1em; vertical-align: -0.18em; background: var(--ember); animation: blink 1s steps(2) infinite; }
 
 /* ---------- Certifications ---------- */
