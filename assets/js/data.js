@@ -1,6 +1,55 @@
 /* Données des projets — modifier ici pour ajouter / corriger un projet.
-   cover / images : nom du fichier dans assets/img (sans "-sm" ni ".webp"), ou un fichier .svg */
+   cover / images : nom du fichier dans assets/img (sans "-sm" ni ".webp"), ou un fichier .svg ;
+   une image peut aussi s'écrire { src, cap } pour avoir une légende */
 window.PROJECTS = [
+  {
+    id: 'tri', featured: true, univers: ['automatisme', 'energie'], cat: 'perso', isNew: 'nouveau · simulation',
+    title: 'Ligne de tri par poids — Factory I/O, CODESYS et QElectroTech',
+    short: 'Une ligne qui pèse des cartons et les trie en trois classes : programme Ladder structuré en Grafcet, liaison Modbus TCP avec la simulation et schéma électrique complet.',
+    year: '2026', frame: 'Projet personnel · automatisme industriel', duration: 'Octobre – novembre 2026', role: 'Seul, de la scène au schéma',
+    cover: 'tri-1', alt: 'Scène Factory I/O « Sorting by Weight » : tapis d’entrée, balance, trieur au croisement et trois tapis de sortie',
+    film: { src: 'assets/video/tri-montage.mp4', poster: 'assets/video/tri-montage-poster.webp', length: '1 min', label: 'La ligne en simulation, la liaison Modbus, le Grafcet et le Ladder. Seuls les passages où tout fonctionne ont été gardés ; les plans marqués ×1,2 sont accélérés.' },
+    images: [
+      { src: 'tri-1', cap: 'La scène Factory I/O « Sorting by Weight » : tapis d’entrée, balance, trieur et trois tapis de sortie' },
+      { src: 'tri-2', cap: 'Mappage Modbus TCP : capteurs en coils 0 à 13, poids en holding register 0, actionneurs en inputs 0 à 10' },
+      { src: 'tri-3', cap: 'Grafcet de la ligne : 5 étapes, le cycle revient en X1 après chaque tri' },
+      { src: 'tri-4', cap: 'Ladder, réseaux 1 à 4 : Marche par auto-maintien, Raz, voyants Start et Stop' },
+      { src: 'tri-5', cap: 'Ladder, réseaux 5 et 6 : classe Moyen et capteur du tapis choisi' },
+      { src: 'tri-6', cap: 'Ladder, réseaux 7 à 16 : transitions et désactivations du Grafcet (SET / RESET)' },
+      { src: 'tri-7', cap: 'Ladder, réseaux 17 à 19 : pesée de 1 s (TON), comparaisons LT 450 et GT 625' },
+      { src: 'tri-8', cap: 'Ladder, réseaux 20 à 24 : admission d’un seul carton par la barrière d’entrée' },
+      { src: 'tri-9', cap: 'Ladder, réseaux 25 à 33 : tapis KM1 à KM5 et trieur YV1 à YV3' },
+      { src: 'tri-10', cap: 'Ladder, réseaux 34 à 37 : compteurs CTU et afficheur de poids' }
+    ],
+    figures: [
+      { v: 5, u: '', l: 'étapes de Grafcet, un seul carton traité à la fois' },
+      { v: 37, u: '', l: 'réseaux Ladder dans le programme final' },
+      { v: 6, u: '', l: 'folios de schéma électrique sous QElectroTech' }
+    ],
+    context: 'Un projet personnel pour me former à l’automatisme industriel. Dans la scène Factory I/O « Sorting by Weight », un tapis amène des cartons de 8, 10 et 15 kg sur une balance (signal 0–10 V), puis un trieur à roues escamotables les envoie à gauche, à droite ou tout droit. La ligne est une simulation ; le schéma électrique, lui, est pensé pour un vrai automate Schneider M241.',
+    missions: [
+      'Relier CODESYS V3.5 SP22 (Control Win, serveur) à Factory I/O (client) en Modbus TCP : capteurs en coils, poids mis à l’échelle ×100 dans un registre, actionneurs en entrées',
+      'Structurer le programme en Grafcet à 5 étapes avec des bobines SET / RESET : attente, chargement d’un seul carton, pesée, transfert, dégagement',
+      'Programmer en Ladder la marche par auto-maintien, l’arrêt, l’arrêt d’urgence, le Reset et les voyants Start et Stop',
+      'Stabiliser la pesée par une temporisation TON de 1 s, puis classer le carton : petit sous 450, grand au-dessus de 625, moyen entre les deux',
+      'N’admettre qu’un carton à la fois par la barrière d’entrée (mémoires Vu et Passe, dégagement de 0,5 s)',
+      'Commander les tapis KM1 à KM5 et le trieur YV1 à YV3, compter les cartons de chaque classe avec trois CTU et afficher le poids',
+      'Dessiner le schéma sous QElectroTech : 5 départs moteur en démarrage direct, alimentation 230 V AC → 24 V DC, automate TM241CE24R, entrées PNP et barrières réflex NF, sorties relais et transistor, chaîne de sécurité'
+    ],
+    learned: [
+      { pb: 'La liaison Modbus ne passait pas', fix: 'Passerelle non configurée, carte réseau à 0.0.0.0, tailles des zones Modbus : résolu pas à pas.' },
+      { pb: 'L’auto-maintien ne tenait pas', fix: 'J’ai compris la différence entre le bouton, qui ne donne qu’une impulsion, et la mémoire Marche.' },
+      { pb: 'Le poids, instable, était lu trop tôt', fix: 'Une temporisation TON de 1 s avant la lecture.' },
+      { pb: 'Deux cartons se retrouvaient sur le trieur', fix: 'Un Grafcet qui ne traite qu’un carton à la fois, et une seule admission par la barrière d’entrée.' },
+      { pb: 'Les gros cartons déclenchaient plusieurs capteurs', fix: 'Seul le capteur du tapis choisi est pris en compte.' },
+      { pb: 'Une barrière réflex était lue à l’envers', fix: 'J’ai vérifié sa polarité réelle en ligne, puis corrigé le programme.' },
+      { pb: 'Le tri à gauche et à droite restait bloqué', fix: 'La balance continue d’avancer pendant le dégagement.' },
+      { pb: 'Des erreurs de câblage dans le schéma', fix: 'Courts-circuits entre phases et entre + et 0 V, COM des sorties côté 0 V, fusible en parallèle : tous trouvés et corrigés.' }
+    ],
+    skills: ['Ladder', 'Grafcet SET / RESET', 'Modbus TCP', 'Temporisations et compteurs', 'Schéma électrique', 'Mise au point en ligne'],
+    tools: ['CODESYS V3.5 SP22', 'Factory I/O', 'QElectroTech', 'Schneider M241 · TM241CE24R'],
+    docs: []
+  },
   {
     id: 'exail', featured: true, univers: ['energie', 'electronique'], cat: 'elec',
     title: 'Stage — Exail Quantum Systems',

@@ -21,7 +21,10 @@
   const UNIV = window.UNIVERS || [];
   // filtres de l'index : les trois univers, puis les projets personnels
   const tagsOf = p => [...(p.univers || []), ...(p.cat === 'perso' ? ['perso'] : [])];
-  const labelOf = p => p.cat === 'perso' ? 'projet perso' : (p.univers || []).map(u => (UNIV.find(x => x.id === u) || {}).short).filter(Boolean).join(' · ');
+  const labelOf = p => [...(p.cat === 'perso' ? ['projet perso'] : []), ...(p.univers || []).map(u => (UNIV.find(x => x.id === u) || {}).short)].filter(Boolean).join(' · ');
+  // une image de galerie : 'nom' ou { src: 'nom', cap: 'légende' }
+  const imgName = im => typeof im === 'string' ? im : im.src;
+  const imgCap = im => typeof im === 'string' ? '' : im.cap || '';
   const byId = Object.fromEntries(P.map(p => [p.id, p]));
   const pad = n => String(n).padStart(2, '0');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -859,7 +862,7 @@
       </div>`).join('');
     return `
       <header class="case__head wrap">
-        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(labelOf(p))}</span>${p.isNew ? '<span class="badge-new mono">nouveau · BUT 3</span>' : ''}${p.wip ? '<span class="badge-new mono">en cours</span>' : ''}</p>
+        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(labelOf(p))}</span>${p.isNew ? `<span class="badge-new mono">${p.isNew === true ? 'nouveau · BUT 3' : esc(p.isNew)}</span>` : ''}${p.wip ? '<span class="badge-new mono">en cours</span>' : ''}</p>
         <h2 class="case__title" id="case-title">${esc(p.title)}</h2>
         <dl class="case__meta">
           <div><dt>année</dt><dd>${esc(p.year)}</dd></div>
@@ -880,6 +883,11 @@
           <p class="case__context" data-cr>${esc(p.context)}</p>
           <h3 data-cr>missions</h3>
           <ol class="case__missions">${p.missions.map((m, k) => `<li data-cr><span class="mono">${pad(k + 1)}</span><span>${esc(m)}</span></li>`).join('')}</ol>
+          ${p.learned ? `<h3 data-cr>ce que j’ai appris</h3>
+          <div class="learn">
+            <div class="learn__row learn__head mono" data-cr><span>problème rencontré</span><span>solution</span></div>${p.learned.map((l, k) => `
+            <div class="learn__row" data-cr><span class="learn__pb"><span class="mono">${pad(k + 1)}</span><span>${esc(l.pb)}</span></span><span class="learn__fix">${esc(l.fix)}</span></div>`).join('')}
+          </div>` : ''}
           <h3 data-cr>acquis</h3>
           <div class="tags" data-cr>${tags(p.skills)}</div>
           ${figs ? `<h3 data-cr>outils</h3><div class="tags" data-cr>${tags(p.tools)}</div>` : ''}
@@ -889,6 +897,14 @@
             <a class="pill" href="${esc(d.href)}" target="_blank" rel="noopener"><span class="pill__icon">${ARROW}${ARROW}</span><span data-roll>${esc(d.label)}</span></a>`).join('')}</div>` : ''}
         </div>
       </div>
+      ${p.film ? `
+      <section class="case__filmsec" aria-label="Vidéo de présentation">
+        <div class="wrap case__gallery-head"><h3 class="mono">en vidéo — ${esc(p.film.length)}</h3><span class="mono">sans son · sous-titrée</span></div>
+        <div class="wrap">
+          <figure class="case__film" data-cr><video src="${esc(p.film.src)}" poster="${esc(p.film.poster)}" controls playsinline preload="none"></video></figure>
+          <p class="case__film-cap" data-cr>${esc(p.film.label)}</p>
+        </div>
+      </section>` : ''}
       ${p.videos ? `
       <section class="case__reels" aria-label="Vidéos">
         <div class="wrap case__gallery-head"><h3 class="mono">en vidéo — ${p.videos.length} séquences</h3><span class="mono">lecture automatique, sans son</span></div>
@@ -897,7 +913,8 @@
       ${p.images.length > 1 ? `
       <section class="case__gallery" aria-label="Galerie">
         <div class="wrap case__gallery-head"><h3 class="mono">galerie — ${p.images.length} images</h3><span class="mono">glisser ou cliquer →</span></div>
-        <div class="gal" data-cursor="glisser">${p.images.map((im, k) => `
+        <div class="gal" data-cursor="glisser">${p.images.map((im, k) => imgCap(im) ? `
+          <figure class="gal__item gal__item--cap" data-lb="${k}"><span class="gal__frame"><img src="${src(imgName(im), 'sm')}" alt="${esc(imgCap(im))}" draggable="false"></span><figcaption class="gal__cap mono">${esc(imgCap(im))}</figcaption></figure>` : `
           <figure class="gal__item" data-lb="${k}"><img src="${src(im, 'sm')}" alt="${esc(p.title)} — image ${k + 1}" draggable="false"></figure>`).join('')}
         </div>
       </section>` : ''}
@@ -949,6 +966,7 @@
     const gal = $('.gal', caseContent);
     if (gal) caseCleanup.push(dragScroll(gal));
     if (p.videos) caseCleanup.push(initReels(caseContent));
+    if (p.film) caseCleanup.push(() => { const v = $('.case__film video', caseContent); if (v) v.pause(); });
     if (p.terminal) {
       const ctl = mountTerminal($('.case__term', caseContent), caseScroll);
       caseCleanup.push(() => ctl && ctl.stop());
@@ -1048,7 +1066,7 @@
   }
 
   /* ---------- Visionneuse ---------- */
-  const lb = $('.lightbox'), lbImg = $('.lightbox__img'), lbCount = $('.lightbox__count');
+  const lb = $('.lightbox'), lbImg = $('.lightbox__img'), lbCount = $('.lightbox__count'), lbCap = $('.lightbox__cap');
   let lbList = [], lbI = 0, lbFocus = null;
 
   function openLB(list, i, fromEl) {
@@ -1066,6 +1084,7 @@
     const item = lbList[lbI];
     lbCount.textContent = `${lbI + 1} / ${lbList.length}`;
     lbImg.alt = item.alt || '';
+    if (lbCap) lbCap.textContent = item.cap || '';
     lbImg.src = thumb ? thumb.currentSrc || thumb.src : item.full;
     const go = () => {
       if (ANIM && thumb) {
@@ -1450,7 +1469,7 @@
     const lbT = t.closest('[data-lb]');
     if (lbT && caseOpen) {
       const p = P[caseIdx];
-      return openLB(p.images.map(im => ({ full: src(im), alt: p.title })), +lbT.dataset.lb, lbT);
+      return openLB(p.images.map(im => ({ full: src(imgName(im)), alt: imgCap(im) || p.title, cap: imgCap(im) })), +lbT.dataset.lb, lbT);
     }
 
     const opener = t.closest('[data-open]');
