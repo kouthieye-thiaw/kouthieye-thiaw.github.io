@@ -8,7 +8,7 @@ window.PROJECTS = [
     short: 'Une ligne qui pèse des cartons et les trie en trois classes : programme Ladder structuré en Grafcet, liaison Modbus TCP avec la simulation et schéma électrique complet.',
     year: '2026', frame: 'Projet personnel · automatisme industriel', duration: 'Octobre – novembre 2026', role: 'Seul, de la scène au schéma',
     cover: 'tri-1', alt: 'Scène Factory I/O « Sorting by Weight » : tapis d’entrée, balance, trieur au croisement et trois tapis de sortie',
-    film: { src: 'assets/video/tri-montage.mp4', poster: 'assets/video/tri-montage-poster.webp', length: '1 min', label: 'La ligne en simulation, la liaison Modbus, le Grafcet et le Ladder. Seuls les passages où tout fonctionne ont été gardés ; les plans marqués ×1,2 sont accélérés.' },
+    film: { src: 'assets/video/tri-montage.mp4', poster: 'assets/video/tri-montage-poster.webp', length: '1 min 20', label: 'La ligne en simulation, la liaison Modbus, le Grafcet, le Ladder et les six folios du schéma. Seuls les passages où tout fonctionne ont été gardés ; les plans marqués ×1,2 sont accélérés.' },
     images: [
       { src: 'tri-1', cap: 'La scène Factory I/O « Sorting by Weight » : tapis d’entrée, balance, trieur et trois tapis de sortie' },
       { src: 'tri-2', cap: 'Mappage Modbus TCP : capteurs en coils 0 à 13, poids en holding register 0, actionneurs en inputs 0 à 10' },
@@ -19,7 +19,13 @@ window.PROJECTS = [
       { src: 'tri-7', cap: 'Ladder, réseaux 17 à 19 : pesée de 1 s (TON), comparaisons LT 450 et GT 625' },
       { src: 'tri-8', cap: 'Ladder, réseaux 20 à 24 : admission d’un seul carton par la barrière d’entrée' },
       { src: 'tri-9', cap: 'Ladder, réseaux 25 à 33 : tapis KM1 à KM5 et trieur YV1 à YV3' },
-      { src: 'tri-10', cap: 'Ladder, réseaux 34 à 37 : compteurs CTU et afficheur de poids' }
+      { src: 'tri-10', cap: 'Ladder, réseaux 34 à 37 : compteurs CTU et afficheur de poids' },
+      { src: 'tri-11', cap: 'Folio 1 · puissance : 5 départs moteur directs (sectionneur-fusible, KM1 à KM5, relais thermiques F1 à F5), moteurs couplés en étoile, disjoncteur Q4 vers la commande' },
+      { src: 'tri-12', cap: 'Folio 2 · alimentation G1 230 V AC → 24 V DC et automate Schneider M241 (TM241CE24R)' },
+      { src: 'tri-13', cap: 'Folio 3 · entrées I0 à I7 : arrêt d’urgence et Stop en NF, Start, Reset, sélecteur, capteurs PNP 3 fils' },
+      { src: 'tri-14', cap: 'Folio 4 · entrées I8 à I13 : six capteurs PNP 3 fils' },
+      { src: 'tri-15', cap: 'Folio 5 · sorties relais : arrêt d’urgence et contacts des relais thermiques F1 à F5 en série, puis bobines KM1 à KM5 et voyant H1' },
+      { src: 'tri-16', cap: 'Folio 6 · sorties transistor protégées par un fusible : trieur YV1 à YV3 et voyant H2' }
     ],
     figures: [
       { v: 5, u: '', l: 'étapes de Grafcet, un seul carton traité à la fois' },
@@ -384,22 +390,34 @@ window.PROJECTS = [
   },
   {
     id: 'stm32', featured: false, univers: ['electronique'], cat: 'embed',
-    title: 'Signal sonore sur STM32',
-    short: 'Générer puis modifier un signal sonore avec un microcontrôleur.',
-    year: '2025', frame: 'SAÉ3 · GEII ESE', duration: 'BUT 2 · 2025', role: 'Projet en équipe',
+    title: 'Traitement du signal audio sur STM32',
+    short: 'Une chaîne audio temps réel en C sur STM32F4 : échantillonnage à 44,1 kHz, volume, écho et notes de musique, sous interruptions et DMA.',
+    year: '2025', frame: 'BUT 2 · S3 · systèmes embarqués', duration: 'Novembre 2025', role: 'Binôme avec Dionísio Hebo',
     cover: 'stm32-1', alt: 'Carte STM32 reliée à un smartphone qui enregistre le signal sonore',
     images: ['stm32-1', 'stm32-2', 'stm32-3'],
-    figures: [],
-    context: 'Projet de deuxième année : produire un signal audio depuis une carte STM32 et en modifier les caractéristiques.',
-    missions: [
-      'Générer des signaux carré, sinus et triangle avec les timers et le DAC',
-      'Modifier en temps réel le signal sonore produit par la carte',
-      'Programmer en C bas niveau, configuration avec STM32CubeMX',
-      'Appliquer les notions mathématiques du traitement du signal'
+    figures: [
+      { v: 44.1, d: 1, u: 'kHz', l: 'fréquence d’échantillonnage tenue par le Timer 4 sous interruption' },
+      { v: 440, u: 'Hz', l: 'premier signal carré produit par le DAC, entre 1 et 2 V' },
+      { v: 8, u: 'notes', l: 'de do à do, choisies au bouton, en carré ou en dents de scie' }
     ],
-    skills: ['Programmation microcontrôleur', 'Traitement du signal'],
-    tools: ['STM32', 'C', 'CubeMX'],
-    docs: []
+    context: 'Module de traitement du signal audio sur cible embarquée : une carte du département GEII construite autour d’un STM32F4, avec entrées jack, micro et GBF, sortie DAC, écran OLED et boutons. Objectif : acquérir un son, le traiter et le restituer en temps réel.',
+    missions: [
+      'Cadencer l’échantillonnage à 44,1 kHz avec le Timer 4 sous interruption, vérifié à l’oscilloscope',
+      'Choisir l’entrée audio (jack, micro, GBF) par un bouton en interruption externe',
+      'Lancer à chaque période 4 conversions de l’ADC par DMA, appliquer le volume et restituer le son au DAC',
+      'Afficher volume et potentiomètres sur l’écran OLED depuis la boucle principale, sans perturber le son',
+      'Créer un effet d’écho avec un tampon de 44 100 échantillons, à paramètres fixes puis réglés aux potentiomètres',
+      'Générer un carré de 440 Hz, puis les notes de do à do en carré ou en dents de scie'
+    ],
+    learned: [
+      { pb: 'Le son ne devait pas craquer pendant l’affichage', fix: 'Le traitement tourne dans les interruptions, l’écran se met à jour dans la boucle principale.' },
+      { pb: 'Le retard de l’écho n’est pas devenu réglable, et le filtrage numérique n’a pas été terminé', fix: 'Le compte rendu le dit franchement : ce sont les deux points à reprendre.' }
+    ],
+    skills: ['Langage C', 'Interruptions et timers', 'ADC, DAC et DMA', 'Traitement numérique du signal'],
+    tools: ['STM32F4', 'STM32CubeMX', 'HAL', 'Écran OLED SSD1306', 'Oscilloscope'],
+    docs: [
+      { label: 'Compte rendu (Google Drive)', href: 'https://drive.google.com/file/d/1h6_qheif3mEM6mqWYxK-5iC8rhYxPU5z/view' }
+    ]
   },
   {
     id: 'rpi', featured: true, univers: ['electronique', 'automatisme'], cat: 'embed',
@@ -437,7 +455,9 @@ window.PROJECTS = [
     ],
     skills: ['Langage C', 'Linux embarqué', 'Liaison série UART', 'PWM et servomoteurs', 'GPIO'],
     tools: ['Raspberry Pi', 'pigpio', 'termios', 'Langage C', 'Servomoteurs', 'Électroaimant'],
-    docs: []
+    docs: [
+      { label: 'Compte rendu (Google Drive)', href: 'https://drive.google.com/file/d/1piVdvsl0gVwcMKb_jBekLRYEAPoDCJjY/view' }
+    ]
   },
   {
     id: 'carte', featured: true, univers: ['electronique'], cat: 'elec',
@@ -527,6 +547,23 @@ window.UNIVERS = [
     id: 'energie', n: '01', title: 'Énergie & électrotechnique', short: 'énergie',
     lead: 'Convertir, distribuer et commander l’énergie électrique : alimentations, machines, départs moteurs et schémas. Je simule en TP, je câble sur banc et je mesure, jusqu’aux alimentations bas bruit sur secteur 230 V que j’ai produites en stage.',
     skills: ['Conversion AC/DC et DC/DC', 'Hacheurs et onduleurs (MLI)', 'Machines synchrones et asynchrones', 'Départs moteurs', 'Schémas électriques · QElectroTech', 'Régimes de neutre', 'Préhabilitation électrique', 'Matlab / Simulink · ISIS'],
+    docs: [
+      { title: 'TP1 · machine synchrone en alternateur', date: '7 octobre 2025', tool: 'ISIS', href: 'https://drive.google.com/file/d/1ulVCNVOhKR60oLZRExytfKoYwt3iYikv/view', open: '',
+        summary: 'Simulation d’une machine synchrone monophasée à excitation indépendante, utilisée en alternateur pour une application de type hydrolienne. À vide, 120 V efficaces à 50 Hz pour 1500 tr/min : la machine est tétrapolaire. Puis essais en court-circuit et en charge.',
+        learned: 'Identifier une machine par ses essais : constante E = K·Ie, impédance synchrone, comportement en charge.' },
+      { title: 'TP2 · machine asynchrone triphasée', date: '14 octobre 2025', tool: 'Matlab / Simulink', href: 'https://drive.google.com/file/d/1xVIweNoQdM5_pA3YYyNaH8KhgMkUFdHJ/view', open: '',
+        summary: 'Démarrage, fonctionnement en charge et alimentation par un onduleur de tension MLI. À U/f constant (400 V à 50 Hz, 320 V à 40 Hz, 240 V à 30 Hz), le couple maximum reste à 81,05 N·m.',
+        learned: 'Pourquoi la commande U/f garde le couple maximum constant, et comment un onduleur MLI fabrique de l’alternatif à partir du continu.' },
+      { title: 'TP3 · hacheur série', date: '21 octobre 2025', tool: 'ISIS (Proteus)', href: 'https://drive.google.com/file/d/1p5IuVJ2q_yCyACFfDBKKX1IKhnqcy9V3/view', open: '',
+        summary: 'Hacheur abaisseur sur charge résistive : la tension moyenne suit le rapport cyclique, un condensateur réduit l’ondulation, et la charge fait passer de la conduction continue à la conduction discontinue (régime critique vers 40 Ω).',
+        learned: 'Le comportement réel d’un convertisseur DC/DC : rôle du rapport cyclique, du filtrage et de la charge.' }
+    ],
+    photos: [
+      { src: 'auto-5', cap: 'Maquette Merlin Gerin « Régime TT/TN » câblée en TP' },
+      { src: 'auto-8', cap: 'Maquette « Régime IT » et son afficheur' },
+      { src: 'auto-7', cap: 'Le boîtier TT/TN et ses cordons de mesure' },
+      { src: 'auto-9', cap: 'Repérage des conducteurs sur la terre fictive' }
+    ],
     vignettes: [
       { type: 'redressement', title: 'Redressement double alternance', line: 'pont de Graetz · les diodes conduisent deux à deux' },
       { type: 'triphase', title: 'Réseau triphasé', line: 'trois phases déphasées de 120°' },
@@ -540,6 +577,14 @@ window.UNIVERS = [
     id: 'electronique', n: '02', title: 'Électronique & systèmes embarqués', short: 'électronique',
     lead: 'Concevoir, fabriquer et programmer des cartes : du schéma KiCad à la carte gravée et testée, du microcontrôleur au bras robotisé, jusqu’aux mesures RF au VNA.',
     skills: ['KiCad · routage et fabrication', 'STM32 · Arduino · C', 'Raspberry Pi · C · Linux', 'FPGA · VHDL', 'RF · VNA · antennes · SDR', 'Oscilloscope · analyseur de spectre', 'Liaisons série · SPI'],
+    docs: [
+      { title: 'Traitement du signal audio sur STM32', date: '26 novembre 2025', tool: 'STM32F4 · C', href: 'https://drive.google.com/file/d/1h6_qheif3mEM6mqWYxK-5iC8rhYxPU5z/view', open: 'stm32',
+        summary: 'Chaîne audio temps réel : échantillonnage à 44,1 kHz par timer et DMA, volume, écho et notes de musique générées au DAC.',
+        learned: 'Séparer le temps réel (interruptions) de l’interface (boucle principale) pour que le son ne craque pas.' },
+      { title: 'Contrôle d’un bras robotisé sur Raspberry Pi', date: '26 novembre 2025', tool: 'Raspberry Pi · C', href: 'https://drive.google.com/file/d/1piVdvsl0gVwcMKb_jBekLRYEAPoDCJjY/view', open: 'rpi',
+        summary: 'Application en C : liaison série à 19200 bauds en mode brut, trames de 4 octets, consignes converties en impulsions de 1000 à 2000 µs pour les servomoteurs.',
+        learned: 'Une lecture bloquante de trames complètes évite les mouvements erratiques ; pigpio impose les droits root.' }
+    ],
     vignettes: [
       { type: 'pcb', title: 'Carte électronique', line: 'le courant circule dans les pistes', open: 'carte' },
       { type: 'mli', title: 'Commande MLI', line: 'un sinus comparé à une porteuse triangulaire', open: 'regul' },
@@ -553,6 +598,16 @@ window.UNIVERS = [
     id: 'automatisme', n: '03', title: 'Automatisme & informatique industrielle', short: 'automatisme',
     lead: 'Faire fonctionner des machines : programme automate en Ladder, Grafcet, réseau Modbus, régulation et scripts de mesure, du cahier des charges jusqu’à la ligne qui tourne.',
     skills: ['CODESYS · Ladder · ST', 'Grafcet', 'Modbus TCP', 'Factory I/O', 'Automgen', 'Régulation P / PI · Matlab · Simulink', 'Python · pyvisa · SQL', 'Diagnostic et maintenance'],
+    docs: [
+      { title: 'TP de maintenance · diagnostic', date: '15 octobre 2025', tool: 'Matlab / Simulink', href: 'https://drive.google.com/file/d/18cCFxbRWnSw6YQ3KojtMv1yTNzLf9hu7/view', open: '',
+        summary: 'Localiser la porte défaillante parmi les 26 portes NAND d’un additionneur 2 bits, en testant du niveau le plus haut au plus bas : la porte NAND124 était collée à 0. Après remplacement, la sortie redevient identique à la référence.',
+        learned: 'Une démarche de diagnostic hiérarchique, qui réduit le nombre de tests.' }
+    ],
+    photos: [
+      { src: 'auto-10', cap: 'Maquette d’automatisme : commutateurs, voyants, arrêt d’urgence et automate' },
+      { src: 'auto-11', cap: 'Commutateurs d’entrée, voyants et arrêt d’urgence' },
+      { src: 'auto-2', cap: 'L’automate et ses modules d’entrées-sorties' }
+    ],
     vignettes: [
       { type: 'ladder', title: 'Ladder', line: 'l’auto-maintien de la mémoire Marche', open: 'tri' },
       { type: 'grafcet', title: 'Grafcet', line: '5 étapes · un seul carton à la fois', open: 'tri' },

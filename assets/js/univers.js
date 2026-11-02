@@ -539,6 +539,34 @@
       <span class="ucard__go" aria-hidden="true">${ARROW}</span>
     </a>`;
 
+  // TP et comptes rendus de l'univers, en lien vers Google Drive
+  const docsHTML = u => !(u.docs && u.docs.length) ? '' : `
+    <div class="dom__sub"><h4 class="mono">TP et comptes rendus · ${u.docs.length}</h4><span class="mono">documents sur Google Drive</span></div>
+    <ol class="udocs">${u.docs.map((d, k) => `
+      <li class="udoc">
+        <span class="udoc__meta mono"><span>${pad(k + 1)}</span><span>${esc(d.date)}</span><span>${esc(d.tool)}</span></span>
+        <div class="udoc__body">
+          <h5 class="udoc__title">${esc(d.title)}</h5>
+          <p class="udoc__sum">${esc(d.summary)}</p>
+          <p class="udoc__learn"><span class="mono">ce que j’ai appris</span>${esc(d.learned)}</p>
+        </div>
+        <span class="udoc__links">
+          <a class="pill udoc__pill" href="${esc(d.href)}" target="_blank" rel="noopener"><span class="pill__icon">${ARROW}${ARROW}</span><span data-roll>lire le compte rendu</span></a>
+          ${d.open && byId[d.open] ? `<a class="udoc__proj mono" href="#projet-${d.open}" data-open="${d.open}">voir le projet →</a>` : ''}
+        </span>
+      </li>`).join('')}
+    </ol>`;
+
+  // photos de TP classées dans l'univers ; elles s'ouvrent dans la visionneuse du site (main.js)
+  const photosHTML = u => !(u.photos && u.photos.length) ? '' : `
+    <div class="dom__sub"><h4 class="mono">au labo · ${u.photos.length} photos</h4><span class="mono">cliquer pour agrandir</span></div>
+    <div class="dphotos">${u.photos.map((ph, k) => `
+      <button type="button" class="dphoto" data-ulb="${u.id}:${k}" data-cursor="zoom" aria-label="Agrandir : ${esc(ph.cap)}">
+        <span class="dphoto__frame"><img src="${src(ph.src, 'sm')}" alt="${esc(ph.cap)}" loading="lazy" decoding="async"></span>
+        <span class="dphoto__cap mono">${esc(ph.cap)}</span>
+      </button>`).join('')}
+    </div>`;
+
   function render() {
     const toc = $('.dom-toc');
     if (toc) toc.innerHTML = U.map(u => {
@@ -565,7 +593,7 @@
           .sort((a, b) => (a.univers[0] === u.id ? 0 : 1) - (b.univers[0] === u.id ? 0 : 1));
         list.innerHTML = `
           <div class="dom__sub"><h4 class="mono">projets · ${ps.length}</h4><span class="mono">cliquer pour ouvrir</span></div>
-          <div class="ucards">${ps.map(p => cardHTML(p, u)).join('')}</div>`;
+          <div class="ucards">${ps.map(p => cardHTML(p, u)).join('')}</div>${docsHTML(u)}${photosHTML(u)}`;
       }
     });
   }

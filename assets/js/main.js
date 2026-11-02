@@ -1466,6 +1466,11 @@
     const nx = t.closest('[data-next]');
     if (nx) { e.preventDefault(); return openCase(nx.dataset.next); }
 
+    const ulbT = t.closest('[data-ulb]');
+    if (ulbT) {
+      const [uid, k] = ulbT.dataset.ulb.split(':'), u = UNIV.find(x => x.id === uid);
+      if (u && u.photos) return openLB(u.photos.map(ph => ({ full: src(ph.src), alt: ph.cap, cap: ph.cap })), +k, ulbT);
+    }
     const lbT = t.closest('[data-lb]');
     if (lbT && caseOpen) {
       const p = P[caseIdx];
