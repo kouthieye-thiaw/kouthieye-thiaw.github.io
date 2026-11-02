@@ -287,11 +287,11 @@
         <text x="${x0}" y="214">porteuse · enveloppe</text>`;
     },
 
-    // liaison série : deux octets en UART (bit de start, LSB d'abord, bit de stop)
+    // liaison série : la trame de 4 octets du test (AB CD 0E 0A), bit de start, LSB d'abord, bit de stop
     uart(id) {
-      const x0 = 30, W = 316, bw = 12, hi = 66, lo = 126;
+      const x0 = 30, W = 316, bw = 10, hi = 66, lo = 126, bytes = [0xAB, 0xCD, 0x0E, 0x0A];
       const frame = byte => [0, ...Array.from({ length: 8 }, (_, i) => (byte >> i) & 1), 1];
-      const bits = [1, 1, 1, ...frame(0x4B), 1, 1, ...frame(0x54), 1, 1, 1];
+      const bits = [1, 1, 1, ...bytes.flatMap(frame), 1, 1, 1];
       const seq = bits.length * bw;
       let d = '', lvl = null, labels = '';
       for (let r = 0; r < 2; r++) bits.forEach((b, i) => {
@@ -301,19 +301,18 @@
         lvl = b;
       });
       d += `H${x0 + 2 * seq}`;
-      for (let r = 0; r < 2; r++) {
-        labels += `<text x="${x0 + (r * bits.length + 3) * bw}" y="${hi - 14}" class="te">0x4B · K</text>`;
-        labels += `<text x="${x0 + (r * bits.length + 15) * bw}" y="${hi - 14}" class="te">0x54 · T</text>`;
-      }
+      for (let r = 0; r < 2; r++) bytes.forEach((v, j) => {
+        labels += `<text x="${x0 + (r * bits.length + 3 + j * 10 + 2) * bw}" y="${hi - 14}" class="te">0x${v.toString(16).toUpperCase().padStart(2, '0')}</text>`;
+      });
       return `
         <defs>${clip(id + 'c', x0, 30, W, 150)}</defs>
         <path class="g" d="M${x0},${hi}H${x0 + W} M${x0},${lo}H${x0 + W}"/>
-        <g clip-path="url(#${id}c)"><g class="a-scroll" style="--d:7s;--dx:-${seq}px">
+        <g clip-path="url(#${id}c)"><g class="a-scroll" style="--d:8s;--dx:-${seq}px">
           <path class="k" d="${d}"/>${labels}
         </g></g>
         <text x="6" y="${hi + 4}">1</text><text x="6" y="${lo + 4}">0</text>
-        <text x="${x0}" y="160">TX · 1 start · 8 bits · 1 stop</text>
-        <text x="${x0}" y="186">octet après octet, LSB d’abord</text>`;
+        <text x="${x0}" y="160">TX · 19200 bauds · start, 8 bits, stop</text>
+        <text x="${x0}" y="186">trame de 4 octets vers /dev/ttyUSB0</text>`;
     },
 
     // bras robotisé : épaule et coude pilotés par des servomoteurs, électroaimant en bout de bras
@@ -334,7 +333,7 @@
           <circle class="k fillink" cx="${sx}" cy="${sy}" r="9"/>
         </g>
         <text x="200" y="40">servomoteurs</text><text x="200" y="56" class="te">électroaimant</text>
-        <text x="200" y="82">Raspberry Pi</text>`;
+        <text x="200" y="82">Raspberry Pi · C</text>`;
     },
 
     // antenne : ondes rayonnées par une antenne directive

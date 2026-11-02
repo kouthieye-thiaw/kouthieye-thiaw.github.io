@@ -403,20 +403,40 @@ window.PROJECTS = [
   },
   {
     id: 'rpi', featured: true, univers: ['electronique', 'automatisme'], cat: 'embed',
-    title: 'Bras robotisé — Raspberry Pi',
-    short: 'Piloter un bras robotisé depuis une Raspberry Pi sous Linux.',
-    year: '2025', frame: 'SAÉ3 · GEII ESE', duration: 'BUT 2 · 2025', role: 'Travail en autonomie',
-    cover: 'rpi.svg', alt: 'Schéma du bras robotisé piloté par une Raspberry Pi',
-    images: ['rpi.svg', 'rpi-2'],
-    figures: [],
-    context: 'Projet d’informatique industrielle de deuxième année : commander un bras robotisé depuis une Raspberry Pi sous Linux.',
-    missions: [
-      'Programmer le bras robotisé en Python sous Linux',
-      'Communiquer en liaison série avec la carte de commande (/dev/ttyUSB0)',
-      'Prendre en main Linux et les architectures réseau'
+    title: 'Bras robotisé piloté par une Raspberry Pi',
+    short: 'Une application en C sur Raspberry Pi qui reçoit des ordres par liaison série et commande les servomoteurs et l’électroaimant d’un bras à trois axes.',
+    year: '2025', frame: 'BUT 2 · S3 · informatique industrielle', duration: 'Novembre 2025', role: 'Binôme avec Louison',
+    cover: 'rpi-1', alt: 'Le bras robotisé à trois axes sur son socle, et son électroaimant en bout de bras',
+    images: [
+      { src: 'rpi-1', cap: 'Le bras à trois axes et, à droite, l’électroaimant monté en bout d’avant-bras' },
+      { src: 'rpi-2', cap: 'Test de la liaison série : l’application, lancée en root, ouvre /dev/ttyUSB0 et reçoit une trame de 4 octets' },
+      { src: 'rpi.svg', cap: 'Le principe : le PC envoie les consignes, la Raspberry Pi pilote les servomoteurs' }
     ],
-    skills: ['Python', 'Linux', 'Architectures réseau', 'Autonomie'],
-    tools: ['Raspberry Pi', 'Python', 'C', 'Liaison série'],
+    videos: [
+      { src: 'assets/video/rpi-servos.mp4', poster: 'assets/video/rpi-servos-poster.webp', step: '01', tag: 'servos', label: 'Le bras passe d’une position à l’autre' },
+      { src: 'assets/video/rpi-bras.mp4', poster: 'assets/video/rpi-bras-poster.webp', step: '02', tag: 'matériel', label: 'Servomoteurs, câblage et électroaimant' }
+    ],
+    videosNote: 'Le PC envoie les consignes par liaison série ; la Raspberry Pi les traduit en impulsions de 1000 à 2000 µs pour chaque servomoteur.',
+    figures: [
+      { v: 19200, u: 'bauds', l: 'liaison série en mode brut (RAW) sur /dev/ttyUSB0' },
+      { v: 4, u: 'octets', l: 'par trame, lus en bloquant pour rester synchronisé' },
+      { v: 3, u: 'axes', l: 'pilotés par servomoteurs, plus un électroaimant' }
+    ],
+    context: 'Module d’informatique industrielle du semestre 3 : concevoir le système embarqué d’un bras robotisé à trois axes. Un PC envoie les consignes de position par liaison série ; une application en C sur la Raspberry Pi les traduit en commandes pour les servomoteurs et l’électroaimant.',
+    missions: [
+      'Configurer les GPIO avec la bibliothèque pigpio : une broche d’activation et une broche de signal PWM par servomoteur',
+      'Ouvrir la liaison série /dev/ttyUSB0 à 19200 bauds en mode brut (termios), pour recevoir tout octet de 0 à 255 sans altération',
+      'Recevoir des trames de 4 octets, assemblées octet par octet',
+      'Convertir une consigne sur 16 bits (0 à 65535) en impulsion de 1000 à 2000 µs, avec une plage propre à chaque articulation pour éviter les collisions',
+      'Charger au démarrage les angles de cinématique inverse, calculés à l’avance dans un fichier CSV, pour répondre sans latence',
+      'Filmer les tests de communication et de mouvement pour valider toute la chaîne de commande'
+    ],
+    learned: [
+      { pb: 'L’initialisation de pigpio échouait', fix: 'La bibliothèque exige les droits administrateur : le programme se lance en root.' },
+      { pb: 'Des octets désynchronisés faisaient bouger le bras au hasard', fix: 'Une lecture bloquante qui attend strictement les 4 octets de la trame.' }
+    ],
+    skills: ['Langage C', 'Linux embarqué', 'Liaison série UART', 'PWM et servomoteurs', 'GPIO'],
+    tools: ['Raspberry Pi', 'pigpio', 'termios', 'Langage C', 'Servomoteurs', 'Électroaimant'],
     docs: []
   },
   {
@@ -478,7 +498,15 @@ window.PROJECTS = [
     short: 'Grafcet, câblage d’armoires et départs moteurs asynchrones.',
     year: '2025', frame: 'BUT 1 · IUT de Rouen', duration: '2024 – 2025', role: 'Travaux pratiques',
     cover: 'auto-1', alt: 'Platine de câblage électrique en régime IT',
-    images: ['auto-1', 'auto-2', 'auto-3', 'auto-4'],
+    images: ['auto-1',
+      { src: 'auto-5', cap: 'Maquette Merlin Gerin « Régime TT/TN » câblée en TP de régimes de neutre' },
+      { src: 'auto-6', cap: 'Régime TT/TN : une autre configuration de câblage' },
+      { src: 'auto-7', cap: 'Le boîtier TT/TN de la maquette et ses cordons de mesure' },
+      { src: 'auto-8', cap: 'Maquette « Régime IT » et son afficheur' },
+      { src: 'auto-9', cap: 'Repérage des conducteurs sur la terre fictive' },
+      { src: 'auto-10', cap: 'Maquette d’automatisme : commutateurs, voyants, arrêt d’urgence et automate' },
+      { src: 'auto-11', cap: 'Entrées sur commutateurs, voyants rouge, orange et vert, arrêt d’urgence' },
+      'auto-2', 'auto-3', 'auto-4'],
     figures: [],
     context: 'Travaux pratiques d’électrotechnique et d’automatisme : du schéma électrique industriel au câblage, puis à la programmation d’automates.',
     missions: [
@@ -511,12 +539,12 @@ window.UNIVERS = [
   {
     id: 'electronique', n: '02', title: 'Électronique & systèmes embarqués', short: 'électronique',
     lead: 'Concevoir, fabriquer et programmer des cartes : du schéma KiCad à la carte gravée et testée, du microcontrôleur au bras robotisé, jusqu’aux mesures RF au VNA.',
-    skills: ['KiCad · routage et fabrication', 'STM32 · Arduino · C', 'Raspberry Pi · Linux', 'FPGA · VHDL', 'RF · VNA · antennes · SDR', 'Oscilloscope · analyseur de spectre', 'Liaisons série · SPI'],
+    skills: ['KiCad · routage et fabrication', 'STM32 · Arduino · C', 'Raspberry Pi · C · Linux', 'FPGA · VHDL', 'RF · VNA · antennes · SDR', 'Oscilloscope · analyseur de spectre', 'Liaisons série · SPI'],
     vignettes: [
       { type: 'pcb', title: 'Carte électronique', line: 'le courant circule dans les pistes', open: 'carte' },
       { type: 'mli', title: 'Commande MLI', line: 'un sinus comparé à une porteuse triangulaire', open: 'regul' },
       { type: 'scope', title: 'Modulation d’amplitude', line: 'porteuse et enveloppe à l’oscilloscope', open: 'modulation' },
-      { type: 'uart', title: 'Liaison série', line: 'UART : un bit de start, 8 bits, un bit de stop', open: 'rpi' },
+      { type: 'uart', title: 'Liaison série', line: 'UART à 19200 bauds · trames de 4 octets', open: 'rpi' },
       { type: 'bras', title: 'Bras robotisé', line: 'Raspberry Pi · servomoteurs · électroaimant', open: 'rpi' },
       { type: 'antenne', title: 'Antenne directive', line: 'HB9CV accordée à 144 MHz', open: 'radio' }
     ]
