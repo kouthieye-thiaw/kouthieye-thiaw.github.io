@@ -18,7 +18,10 @@
   const CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const P = window.PROJECTS || [];
-  const CATS = window.PROJECT_CATS || {};
+  const UNIV = window.UNIVERS || [];
+  // filtres de l'index : les trois univers, puis les projets personnels
+  const tagsOf = p => [...(p.univers || []), ...(p.cat === 'perso' ? ['perso'] : [])];
+  const labelOf = p => p.cat === 'perso' ? 'projet perso' : (p.univers || []).map(u => (UNIV.find(x => x.id === u) || {}).short).filter(Boolean).join(' · ');
   const byId = Object.fromEntries(P.map(p => [p.id, p]));
   const pad = n => String(n).padStart(2, '0');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -47,14 +50,15 @@
       </a>`).join(''));
     $('.hscroll__count').textContent = `01 / ${pad(feat.length)}`;
 
-    const counts = P.reduce((a, p) => (a[p.cat] = (a[p.cat] || 0) + 1, a), {});
-    $('.filters').innerHTML = Object.entries(CATS)
-      .filter(([k]) => k === 'all' || counts[k])
-      .map(([k, v]) => `<button type="button" class="chip${k === 'all' ? ' is-active' : ''}" data-filter="${k}" aria-pressed="${k === 'all'}">${v}<sup>${k === 'all' ? P.length : counts[k]}</sup></button>`)
+    const chips = [['all', 'Tous'], ...UNIV.map(u => [u.id, u.short.charAt(0).toUpperCase() + u.short.slice(1)]), ['perso', 'Projets perso']];
+    $('.filters').innerHTML = chips
+      .map(([k, v]) => [k, v, k === 'all' ? P.length : P.filter(p => tagsOf(p).includes(k)).length])
+      .filter(([, , n]) => n)
+      .map(([k, v, n]) => `<button type="button" class="chip${k === 'all' ? ' is-active' : ''}" data-filter="${k}" aria-pressed="${k === 'all'}">${v}<sup>${n}</sup></button>`)
       .join('');
 
     $('.index__list').innerHTML = P.map((p, i) => `
-      <li class="irow" data-cat="${p.cat}">
+      <li class="irow" data-tags="${tagsOf(p).join(' ')}">
         <a class="irow__link" href="#projet-${p.id}" data-open="${p.id}" data-preview="${p.id}">
           <span class="irow__in">
             <span class="irow__n mono">${pad(i + 1)}</span>
@@ -698,7 +702,7 @@
       const f = b.dataset.filter;
       $$('.chip').forEach(c => { const on = c === b; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', on); });
       rows.forEach(r => {
-        const hide = f !== 'all' && r.dataset.cat !== f;
+        const hide = f !== 'all' && !r.dataset.tags.split(' ').includes(f);
         r.classList.toggle('is-hidden', hide);
         $('a', r).tabIndex = hide ? -1 : 0;
       });
@@ -855,7 +859,7 @@
       </div>`).join('');
     return `
       <header class="case__head wrap">
-        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(CATS[p.cat] || '')}</span>${p.isNew ? '<span class="badge-new mono">nouveau · BUT 3</span>' : ''}${p.wip ? '<span class="badge-new mono">en cours</span>' : ''}</p>
+        <p class="case__cat mono"><span>(${pad(i + 1)})</span><span>${esc(labelOf(p))}</span>${p.isNew ? '<span class="badge-new mono">nouveau · BUT 3</span>' : ''}${p.wip ? '<span class="badge-new mono">en cours</span>' : ''}</p>
         <h2 class="case__title" id="case-title">${esc(p.title)}</h2>
         <dl class="case__meta">
           <div><dt>année</dt><dd>${esc(p.year)}</dd></div>

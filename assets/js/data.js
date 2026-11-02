@@ -2,7 +2,7 @@
    cover / images : nom du fichier dans assets/img (sans "-sm" ni ".webp"), ou un fichier .svg */
 window.PROJECTS = [
   {
-    id: 'exail', featured: true, cat: 'elec',
+    id: 'exail', featured: true, univers: ['energie', 'electronique'], cat: 'elec',
     title: 'Stage — Exail Quantum Systems',
     short: 'Sept alimentations bas bruit « Bornus » produites et un synthétiseur de fréquence AOM à base de DDS intégré, testé et livré.',
     year: '2026', frame: 'Stage · Exail, Gradignan', duration: '7 avril – 12 juin 2026 · 10 semaines', role: 'Stagiaire en intégration électronique',
@@ -32,7 +32,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'linfan', featured: true, cat: 'perso',
+    id: 'linfan', featured: true, univers: [], cat: 'perso',
     title: 'Linfan — mon IA privée, 100 % locale',
     short: 'Un assistant IA qui tourne entièrement sur mon PC : modèle Qwen 3.6 35B, mémoire longue, et des outils pour lire, chercher et ranger mes fichiers.',
     year: '2026', frame: 'Projet personnel', duration: 'Octobre 2026', role: 'Conception, configuration et interface',
@@ -59,7 +59,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'sql', featured: false, cat: 'data', isNew: true,
+    id: 'sql', featured: false, univers: ['automatisme'], cat: 'data', isNew: true,
     title: 'Base de données Northwind — SQL & Python',
     short: 'Administrer une base MySQL, écrire requêtes et vues, puis les exploiter dans un script Python.',
     year: '2026', frame: 'BUT 3 · Ressource Base de données', duration: 'TP, séances 1 à 5', role: 'Travail individuel',
@@ -87,7 +87,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'radio', featured: true, cat: 'rf',
+    id: 'radio', featured: true, univers: ['electronique'], cat: 'rf',
     title: 'Radiogoniométrie — antenne HB9CV',
     short: 'Une antenne directionnelle accordée à 144 MHz pour une chasse au renard sur le campus.',
     year: '2026', frame: 'SAÉ4 · GEII ESE', duration: 'Mars 2026', role: 'Projet en équipe',
@@ -108,7 +108,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'modulation', featured: true, cat: 'rf',
+    id: 'modulation', featured: true, univers: ['electronique'], cat: 'rf',
     title: 'Modulation d’amplitude — du GBF au spectre',
     short: 'Moduler une porteuse, lire son enveloppe à l’oscilloscope puis ses raies latérales en FFT.',
     year: '2026', frame: 'TP · IUT de Bordeaux', duration: 'Mars 2026', role: 'Travaux pratiques',
@@ -135,7 +135,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'vna', featured: true, cat: 'rf',
+    id: 'vna', featured: false, univers: ['electronique'], cat: 'rf',
     title: 'Datasheet RF — diviseur de Wilkinson',
     short: 'Caractériser au VNA un composant RF inconnu, puis en rédiger la datasheet.',
     year: '2026', frame: 'Électronique RF · BUT 2', duration: 'Mars 2026', role: 'Binôme avec Dionísio Hebo',
@@ -161,7 +161,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'coffre', featured: true, cat: 'rf',
+    id: 'coffre', featured: false, univers: ['electronique'], cat: 'rf',
     title: 'Coffre-fort — analyse & rejeu de signal',
     short: 'Intercepter, démoduler et reconstituer la trame d’une clé électronique.',
     year: '2026', frame: 'Sécurité embarquée · BUT 2', duration: 'Mars 2026', role: 'Projet en équipe',
@@ -180,7 +180,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'geo', featured: false, cat: 'embed',
+    id: 'geo', featured: false, univers: ['electronique'], cat: 'embed',
     title: 'Géolocalisation — distance entre cartes',
     short: 'Une communication client / serveur entre cartes pour mesurer la distance qui les sépare.',
     year: '2026', frame: 'Systèmes communicants · BUT 2', duration: 'Mars 2026', role: 'Projet en équipe',
@@ -199,7 +199,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'drone', featured: true, cat: 'auto',
+    id: 'drone', featured: true, univers: ['automatisme', 'electronique'], cat: 'auto',
     title: 'Drone Parrot — modélisation & PID',
     short: 'Identifier la dynamique d’un drone, régler ses correcteurs PID et le piloter via son jumeau numérique.',
     year: '2025', frame: 'AOP S3 · GEII ESE', duration: 'Semestre 3 · BUT 2', role: 'Compte rendu individuel · groupe B1',
@@ -226,7 +226,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'identif', featured: true, cat: 'auto',
+    id: 'identif', featured: false, univers: ['automatisme', 'energie'], cat: 'auto',
     title: 'Identification de systèmes — thermique et moteur CC',
     short: 'Passer du système réel à son modèle : un système thermique et un moteur à courant continu identifiés au premier ordre.',
     year: '2025', frame: 'BUT 2 · S3 · automatique, TP1 et TP2', duration: 'Décembre 2025', role: 'Binôme avec Joris Coppi',
@@ -254,7 +254,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'regul', featured: true, cat: 'auto',
+    id: 'regul', featured: true, univers: ['automatisme', 'electronique'], cat: 'auto',
     title: 'Régulation P et PI — moteur sur STM32 et système thermique',
     short: 'Dimensionner un correcteur sous Matlab, le coder en C sur STM32 et annuler l’erreur statique grâce à l’action intégrale.',
     year: '2026', frame: 'BUT 2 · S4 · automatique, TP1 et TP2', duration: 'Février 2026', role: 'Binôme avec Joris Coppi',
@@ -282,7 +282,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'banc', featured: true, cat: 'auto',
+    id: 'banc', featured: true, univers: ['automatisme', 'electronique'], cat: 'auto',
     title: 'Banc de mesure automatisé sous Python',
     short: 'Piloter un générateur et un multimètre en Python pour tracer seul la caractéristique I = f(U) d’une diode.',
     year: '2026', frame: 'BUT 2 · S3 · informatique de spécialité', duration: 'Janvier 2026 · 3 séances', role: 'Binôme avec Louison Prevost-Bonnefille',
@@ -314,7 +314,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'sumo', featured: true, cat: 'embed',
+    id: 'sumo', featured: false, univers: ['electronique'], cat: 'embed',
     title: 'Robot Sumo autonome',
     short: 'Concevoir de zéro un robot de combat à partir d’un cahier des charges.',
     year: '2025', frame: 'SAÉ3 · GEII ESE', duration: 'BUT 2 · 2025 – 2026', role: 'Projet en équipe',
@@ -334,7 +334,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'stm32', featured: false, cat: 'embed',
+    id: 'stm32', featured: false, univers: ['electronique'], cat: 'embed',
     title: 'Signal sonore sur STM32',
     short: 'Générer puis modifier un signal sonore avec un microcontrôleur.',
     year: '2025', frame: 'SAÉ3 · GEII ESE', duration: 'BUT 2 · 2025', role: 'Projet en équipe',
@@ -353,7 +353,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'rpi', featured: false, cat: 'embed',
+    id: 'rpi', featured: true, univers: ['electronique', 'automatisme'], cat: 'embed',
     title: 'Bras robotisé — Raspberry Pi',
     short: 'Piloter un bras robotisé depuis une Raspberry Pi sous Linux.',
     year: '2025', frame: 'SAÉ3 · GEII ESE', duration: 'BUT 2 · 2025', role: 'Travail en autonomie',
@@ -371,7 +371,7 @@ window.PROJECTS = [
     docs: []
   },
   {
-    id: 'carte', featured: true, cat: 'elec',
+    id: 'carte', featured: true, univers: ['electronique'], cat: 'elec',
     title: 'Carte de signalisation pour robot mobile',
     short: 'De la schématique à la carte gravée, soudée et testée : mon premier PCB.',
     year: '2025', frame: 'SAÉ1 & SAÉ2 · IUT de Rouen', duration: 'BUT 1 · 2024 – 2025', role: 'Projet individuel',
@@ -403,7 +403,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'fpga', featured: false, cat: 'elec',
+    id: 'fpga', featured: false, univers: ['electronique'], cat: 'elec',
     title: 'Circuit logique sur FPGA — VHDL',
     short: 'Décrire, simuler et déployer un circuit logique sur un FPGA Altera.',
     year: '2025', frame: 'SAÉ2 · IUT de Rouen', duration: 'BUT 1 · 2025', role: 'Travail en groupe',
@@ -424,7 +424,7 @@ window.PROJECTS = [
     ]
   },
   {
-    id: 'auto', featured: false, cat: 'auto',
+    id: 'auto', featured: false, univers: ['energie', 'automatisme'], cat: 'auto',
     title: 'Automatisme & armoires électriques',
     short: 'Grafcet, câblage d’armoires et départs moteurs asynchrones.',
     year: '2025', frame: 'BUT 1 · IUT de Rouen', duration: '2024 – 2025', role: 'Travaux pratiques',
@@ -444,15 +444,48 @@ window.PROJECTS = [
   }
 ];
 
-window.PROJECT_CATS = {
-  all: 'Tous',
-  perso: 'Projets perso',
-  elec: 'Électronique',
-  rf: 'RF & signal',
-  embed: 'Embarqué',
-  auto: 'Automatisme',
-  data: 'Données'
-};
+/* Les trois univers : textes, compétences et vignettes animées (assets/js/univers.js) */
+window.UNIVERS = [
+  {
+    id: 'energie', n: '01', title: 'Énergie & électrotechnique', short: 'énergie',
+    lead: 'Convertir, distribuer et commander l’énergie électrique : alimentations, machines, départs moteurs et schémas. Je simule en TP, je câble sur banc et je mesure, jusqu’aux alimentations bas bruit sur secteur 230 V que j’ai produites en stage.',
+    skills: ['Conversion AC/DC et DC/DC', 'Hacheurs et onduleurs (MLI)', 'Machines synchrones et asynchrones', 'Départs moteurs', 'Schémas électriques · QElectroTech', 'Régimes de neutre', 'Préhabilitation électrique', 'Matlab / Simulink · ISIS'],
+    vignettes: [
+      { type: 'redressement', title: 'Redressement double alternance', line: 'pont de Graetz · les diodes conduisent deux à deux' },
+      { type: 'triphase', title: 'Réseau triphasé', line: 'trois phases déphasées de 120°' },
+      { type: 'moteur', title: 'Moteur asynchrone', line: 'champ tournant · glissement du rotor' },
+      { type: 'hacheur', title: 'Hacheur série', line: 'la valeur moyenne suit le rapport cyclique' },
+      { type: 'depart', title: 'Départ moteur direct', line: 'la commande 24 V ferme KM1, le moteur démarre', open: 'auto' },
+      { type: 'phaseurs', title: 'Diagramme de Fresnel', line: 'tension, courant et déphasage φ' }
+    ]
+  },
+  {
+    id: 'electronique', n: '02', title: 'Électronique & systèmes embarqués', short: 'électronique',
+    lead: 'Concevoir, fabriquer et programmer des cartes : du schéma KiCad à la carte gravée et testée, du microcontrôleur au bras robotisé, jusqu’aux mesures RF au VNA.',
+    skills: ['KiCad · routage et fabrication', 'STM32 · Arduino · C', 'Raspberry Pi · Linux', 'FPGA · VHDL', 'RF · VNA · antennes · SDR', 'Oscilloscope · analyseur de spectre', 'Liaisons série · SPI'],
+    vignettes: [
+      { type: 'pcb', title: 'Carte électronique', line: 'le courant circule dans les pistes', open: 'carte' },
+      { type: 'mli', title: 'Commande MLI', line: 'un sinus comparé à une porteuse triangulaire', open: 'regul' },
+      { type: 'scope', title: 'Modulation d’amplitude', line: 'porteuse et enveloppe à l’oscilloscope', open: 'modulation' },
+      { type: 'uart', title: 'Liaison série', line: 'UART : un bit de start, 8 bits, un bit de stop', open: 'rpi' },
+      { type: 'bras', title: 'Bras robotisé', line: 'Raspberry Pi · servomoteurs · électroaimant', open: 'rpi' },
+      { type: 'antenne', title: 'Antenne directive', line: 'HB9CV accordée à 144 MHz', open: 'radio' }
+    ]
+  },
+  {
+    id: 'automatisme', n: '03', title: 'Automatisme & informatique industrielle', short: 'automatisme',
+    lead: 'Faire fonctionner des machines : programme automate en Ladder, Grafcet, réseau Modbus, régulation et scripts de mesure, du cahier des charges jusqu’à la ligne qui tourne.',
+    skills: ['CODESYS · Ladder · ST', 'Grafcet', 'Modbus TCP', 'Factory I/O', 'Automgen', 'Régulation P / PI · Matlab · Simulink', 'Python · pyvisa · SQL', 'Diagnostic et maintenance'],
+    vignettes: [
+      { type: 'ladder', title: 'Ladder', line: 'l’auto-maintien de la mémoire Marche', open: 'tri' },
+      { type: 'grafcet', title: 'Grafcet', line: '5 étapes · un seul carton à la fois', open: 'tri' },
+      { type: 'tri', title: 'Ligne de tri par poids', line: 'petit à gauche · moyen à droite · grand tout droit', open: 'tri' },
+      { type: 'pupitre', title: 'Pupitre opérateur', line: 'voyants, afficheur de poids, arrêt d’urgence', open: 'tri' },
+      { type: 'modbus', title: 'Modbus TCP', line: 'CODESYS serveur · Factory I/O client', open: 'tri' },
+      { type: 'boucle', title: 'Régulation PI', line: 'la sortie rejoint la consigne, sans erreur statique', open: 'regul' }
+    ]
+  }
+];
 
 /* Éditorial noir & blanc (assets/img/edito/edito-NN.webp) — séance du 23 mai 2026 */
 window.EDITO = [

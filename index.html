@@ -53,6 +53,7 @@
     <nav class="nav__links" aria-label="Navigation principale">
       <a href="#profil" data-roll>profil</a>
       <a href="#projets" data-roll>projets</a>
+      <a href="#univers" data-roll>univers</a>
       <a href="#competences" data-roll>compétences</a>
       <a href="#certifications" data-roll>certifications</a>
       <a href="#parcours" data-roll>parcours</a>
@@ -67,18 +68,19 @@
     </div>
   </header>
 
-  <div class="menu" id="menu" hidden>
+  <div class="menu" id="menu" data-lenis-prevent hidden>
     <nav aria-label="Menu mobile">
       <a href="#profil"><span class="mono">01</span>profil</a>
       <a href="#projets"><span class="mono">02</span>projets</a>
-      <a href="#competences"><span class="mono">03</span>compétences</a>
-      <a href="#certifications"><span class="mono">04</span>certifications</a>
-      <a href="#parcours"><span class="mono">05</span>parcours</a>
-      <a href="#engagement"><span class="mono">06</span>engagement</a>
-      <a href="#univers"><span class="mono">07</span>univers</a>
-      <a href="#mannequinat"><span class="mono">08</span>mannequinat</a>
-      <a href="#cv"><span class="mono">09</span>cv</a>
-      <a href="#contact"><span class="mono">10</span>contact</a>
+      <a href="#univers"><span class="mono">03</span>univers</a>
+      <a href="#competences"><span class="mono">04</span>compétences</a>
+      <a href="#certifications"><span class="mono">05</span>certifications</a>
+      <a href="#parcours"><span class="mono">06</span>parcours</a>
+      <a href="#engagement"><span class="mono">07</span>engagement</a>
+      <a href="#passions"><span class="mono">08</span>passions</a>
+      <a href="#mannequinat"><span class="mono">09</span>mannequinat</a>
+      <a href="#cv"><span class="mono">10</span>cv</a>
+      <a href="#contact"><span class="mono">11</span>contact</a>
     </nav>
     <p class="menu__foot mono">thiawkouthieye@gmail.com · +33 7 45 35 58 13</p>
   </div>
@@ -96,7 +98,7 @@
         <span class="hero__line hero__line--2" aria-hidden="true">Thiaw<span class="hero__dot"></span></span>
       </h1>
       <div class="wrap hero__bottom">
-        <p class="hero__lead">Étudiant en 3<sup>e</sup> année de BUT GEII, parcours Électronique et Systèmes Embarqués, à l’IUT de Bordeaux. Je conçois, je mesure et je fiabilise des systèmes électroniques, du schéma KiCad jusqu’au banc de test.</p>
+        <p class="hero__lead">Étudiant en 3<sup>e</sup> année de BUT GEII, parcours Électronique et Systèmes Embarqués, à l’IUT de Bordeaux. Je conçois, je programme et je teste des systèmes, en électronique et embarqué, en automatisme et en énergie, du schéma jusqu’au banc de test.</p>
         <div class="hero__ctas">
           <a href="#projets" class="pill" data-magnetic=".2">
             <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
@@ -117,7 +119,7 @@
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>KiCad</span><i></i><span>STM32</span><i></i><span>VHDL</span><i></i><span>Python</span><i></i><span>SQL</span><i></i><span>RF 144 MHz</span><i></i><span>VNA</span><i></i><span>LTspice</span><i></i><span>Arduino</span><i></i><span>Grafcet</span><i></i><span>Raspberry Pi</span><i></i><span>Quartus</span><i></i>
+        <span>KiCad</span><i></i><span>STM32</span><i></i><span>VHDL</span><i></i><span>Python</span><i></i><span>SQL</span><i></i><span>RF 144 MHz</span><i></i><span>VNA</span><i></i><span>LTspice</span><i></i><span>Arduino</span><i></i><span>Grafcet</span><i></i><span>Raspberry Pi</span><i></i><span>Quartus</span><i></i><span>CODESYS</span><i></i><span>Ladder</span><i></i><span>Modbus TCP</span><i></i><span>Factory I/O</span><i></i><span>QElectroTech</span><i></i><span>Matlab</span><i></i>
       </div>
     </div>
 
@@ -178,7 +180,7 @@
           <div class="hpanel">
             <header class="sh sh--light"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>projets</span><span class="sh__r">(02)</span><span class="sh__line"></span></header>
             <h2 class="h-lg" data-split>Dix-huit projets, du schéma au signal.</h2>
-            <p class="hpanel__p">Électronique de précision, RF, systèmes embarqués, automatisme et données. Une sélection de ce que j’ai conçu, mesuré et livré pendant mon BUT. Cliquez sur un projet pour l’explorer.</p>
+            <p class="hpanel__p">Électronique et systèmes embarqués, automatisme et informatique industrielle, énergie et électrotechnique. Une sélection de ce que j’ai conçu, mesuré et livré pendant mon BUT. Cliquez sur un projet pour l’explorer.</p>
             <p class="hpanel__hint mono"><span class="hpanel__arrow">→</span> faites défiler</p>
           </div>
           <!-- cartes injectées par main.js -->
@@ -205,16 +207,104 @@
 
     <div class="hover-preview" aria-hidden="true"><div class="hover-preview__inner"></div></div>
 
+    <!-- (03) Univers : énergie, électronique, automatisme -->
+    <section class="section domains" id="univers">
+      <div class="wrap">
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>univers</span><span class="sh__r">(03)</span><span class="sh__line"></span></header>
+        <div class="split-head">
+          <h2 class="h-lg" data-split>Trois univers, un technicien polyvalent.</h2>
+          <p class="lead" data-reveal>Énergie, électronique, automatisme : les trois grands domaines du génie électrique, tels que je les ai pratiqués en TP, en projet et en stage. Chaque vignette s’anime comme sur un banc ; cliquez dessus pour ouvrir le projet lié.</p>
+        </div>
+        <nav class="dom-toc" aria-label="Les trois univers" data-reveal></nav>
+      </div>
+
+      <article class="dom" id="energie">
+        <div class="wrap"><header class="dom__head"></header></div>
+        <div class="wrap"><div class="dom__banner"></div></div>
+        <div class="wrap">
+          <div class="dom__projects"></div>
+        </div>
+      </article>
+
+      <article class="dom" id="electronique">
+        <div class="wrap"><header class="dom__head"></header></div>
+        <div class="wrap"><div class="dom__banner"></div></div>
+        <div class="wrap">
+          <div class="dom__projects"></div>
+          <div class="fab">
+            <div class="fab__text">
+              <span class="mono fab__kicker">en atelier · 2 vidéos</span>
+              <h3 class="h-md" data-split>Concevoir et fabriquer des cartes électroniques.</h3>
+              <p data-reveal>Je ne m’arrête pas au routage : je fabrique mes cartes moi-même, de l’insolation à la gravure, puis je perce, je soude et je valide la carte sous tension.</p>
+              <ol class="fab__steps" data-reveal>
+                <li><span class="mono">01</span>Schématique &amp; simulation</li>
+                <li><span class="mono">02</span>Routage sous KiCad</li>
+                <li class="is-video"><span class="mono">03</span>Insolation &amp; gravure<span class="mono fab__tag">vidéo</span></li>
+                <li><span class="mono">04</span>Perçage &amp; soudure</li>
+                <li class="is-video"><span class="mono">05</span>Test sous tension<span class="mono fab__tag">vidéo</span></li>
+              </ol>
+              <a href="#projet-carte" class="pill" data-open="carte" data-magnetic=".2">
+                <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
+                <span data-roll>voir la carte de signalisation</span>
+              </a>
+            </div>
+            <div class="fab__reels" data-reels="carte"><!-- vidéos injectées par main.js --></div>
+          </div>
+
+          <div class="fab fab--rev">
+            <div class="fab__reels" data-reels="modulation"><!-- vidéos injectées par main.js --></div>
+            <div class="fab__text">
+              <span class="mono fab__kicker">en TP · 2 vidéos + captures</span>
+              <h3 class="h-md" data-split>La modulation d’amplitude, du GBF au spectre.</h3>
+              <p data-reveal>Une porteuse, un signal modulant, et deux façons de lire le résultat : l’enveloppe à l’oscilloscope, puis la porteuse et ses raies latérales en FFT.</p>
+              <button type="button" class="fab__shot" data-open="modulation" data-cursor="ouvrir" aria-label="Ouvrir le TP modulation d’amplitude">
+                <img src="assets/img/mod-1-sm.webp" alt="Oscilloscope : signal modulant en vert, signal modulé en amplitude en jaune" loading="lazy" decoding="async">
+                <span class="mono fab__shot-cap">capture · enveloppe AM à l’oscilloscope</span>
+              </button>
+              <a href="#projet-modulation" class="pill" data-open="modulation" data-magnetic=".2">
+                <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
+                <span data-roll>voir le TP modulation</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <article class="dom" id="automatisme">
+        <div class="wrap"><header class="dom__head"></header></div>
+        <div class="wrap"><div class="dom__banner"></div></div>
+        <div class="wrap">
+          <div class="dom__projects"></div>
+          <div class="db">
+            <div class="db__text">
+              <span class="badge-new mono">nouveau · BUT 3</span>
+              <h3 class="h-md" data-split>Bases de données : du SQL au script Python.</h3>
+              <p data-reveal>En TP, j’ai administré une base MariaDB sur un serveur Debian, retrouvé par ingénierie inverse le modèle de la base Northwind, écrit des requêtes avec jointures, agrégats et vues, puis développé un menu Python qui interroge la base.</p>
+              <a href="#projet-sql" class="pill" data-open="sql" data-magnetic=".2">
+                <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
+                <span data-roll>ouvrir le projet</span>
+              </a>
+            </div>
+            <div class="term" data-term>
+              <div class="term__bar"><i></i><i></i><i></i><span class="mono">but@debian — northwind</span><button type="button" class="term__replay mono">rejouer</button></div>
+              <div class="term__body mono" aria-label="Démonstration de requêtes SQL et d’un script Python sur la base Northwind"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <div class="marquee marquee--big" aria-hidden="true">
       <div class="marquee__track">
         <span>concevoir</span><i></i><span>vérifier</span><i></i><span>maintenir</span><i></i><span>concevoir</span><i></i><span>vérifier</span><i></i><span>maintenir</span><i></i>
       </div>
     </div>
 
-    <!-- (03) Compétences -->
+    <!-- (04) Compétences -->
     <section class="section" id="competences">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>compétences</span><span class="sh__r">(03)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>compétences</span><span class="sh__r">(04)</span><span class="sh__line"></span></header>
         <div class="split-head">
           <h2 class="h-lg" data-split>Concevoir, vérifier, maintenir.</h2>
           <p class="lead" data-reveal>Les trois compétences du BUT GEII, et les projets qui les prouvent.</p>
@@ -268,65 +358,13 @@
           <div class="srow" data-reveal><span class="mono">(i)</span><h3>Automatique</h3><div class="tags"><span class="tag">Identification de systèmes</span><span class="tag">Correcteurs P / PI</span><span class="tag">Bode &amp; Nichols</span><span class="tag">Matlab / Simulink</span><span class="tag">Commande numérique</span></div></div>
         </div>
 
-        <div class="fab">
-          <div class="fab__text">
-            <span class="mono fab__kicker">en atelier · 2 vidéos</span>
-            <h3 class="h-md" data-split>Concevoir et fabriquer des cartes électroniques.</h3>
-            <p data-reveal>Je ne m’arrête pas au routage : je fabrique mes cartes moi-même, de l’insolation à la gravure, puis je perce, je soude et je valide la carte sous tension.</p>
-            <ol class="fab__steps" data-reveal>
-              <li><span class="mono">01</span>Schématique &amp; simulation</li>
-              <li><span class="mono">02</span>Routage sous KiCad</li>
-              <li class="is-video"><span class="mono">03</span>Insolation &amp; gravure<span class="mono fab__tag">vidéo</span></li>
-              <li><span class="mono">04</span>Perçage &amp; soudure</li>
-              <li class="is-video"><span class="mono">05</span>Test sous tension<span class="mono fab__tag">vidéo</span></li>
-            </ol>
-            <a href="#projet-carte" class="pill" data-open="carte" data-magnetic=".2">
-              <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
-              <span data-roll>voir la carte de signalisation</span>
-            </a>
-          </div>
-          <div class="fab__reels" data-reels="carte"><!-- vidéos injectées par main.js --></div>
-        </div>
-
-        <div class="fab fab--rev">
-          <div class="fab__reels" data-reels="modulation"><!-- vidéos injectées par main.js --></div>
-          <div class="fab__text">
-            <span class="mono fab__kicker">en TP · 2 vidéos + captures</span>
-            <h3 class="h-md" data-split>La modulation d’amplitude, du GBF au spectre.</h3>
-            <p data-reveal>Une porteuse, un signal modulant, et deux façons de lire le résultat : l’enveloppe à l’oscilloscope, puis la porteuse et ses raies latérales en FFT.</p>
-            <button type="button" class="fab__shot" data-open="modulation" data-cursor="ouvrir" aria-label="Ouvrir le TP modulation d’amplitude">
-              <img src="assets/img/mod-1-sm.webp" alt="Oscilloscope : signal modulant en vert, signal modulé en amplitude en jaune" loading="lazy" decoding="async">
-              <span class="mono fab__shot-cap">capture · enveloppe AM à l’oscilloscope</span>
-            </button>
-            <a href="#projet-modulation" class="pill" data-open="modulation" data-magnetic=".2">
-              <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
-              <span data-roll>voir le TP modulation</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="db">
-          <div class="db__text">
-            <span class="badge-new mono">nouveau · BUT 3</span>
-            <h3 class="h-md" data-split>Bases de données : du SQL au script Python.</h3>
-            <p data-reveal>En TP, j’ai administré une base MariaDB sur un serveur Debian, retrouvé par ingénierie inverse le modèle de la base Northwind, écrit des requêtes avec jointures, agrégats et vues, puis développé un menu Python qui interroge la base.</p>
-            <a href="#projet-sql" class="pill" data-open="sql" data-magnetic=".2">
-              <span class="pill__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>
-              <span data-roll>ouvrir le projet</span>
-            </a>
-          </div>
-          <div class="term" data-term>
-            <div class="term__bar"><i></i><i></i><i></i><span class="mono">but@debian — northwind</span><button type="button" class="term__replay mono">rejouer</button></div>
-            <div class="term__body mono" aria-label="Démonstration de requêtes SQL et d’un script Python sur la base Northwind"></div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- (04) Certifications -->
+    <!-- (05) Certifications -->
     <section class="section certs" id="certifications">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>certifications</span><span class="sh__r">(04)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>certifications</span><span class="sh__r">(05)</span><span class="sh__line"></span></header>
         <div class="split-head">
           <h2 class="h-lg" data-split>Licences &amp; certifications.</h2>
           <p class="lead" data-reveal>Des certifications officielles qui valident ce que je pratique : la radio, les langues et le numérique.</p>
@@ -388,10 +426,10 @@
       </div>
     </section>
 
-    <!-- (05) Parcours -->
+    <!-- (06) Parcours -->
     <section class="section" id="parcours">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>parcours</span><span class="sh__r">(05)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>parcours</span><span class="sh__r">(06)</span><span class="sh__line"></span></header>
         <h2 class="h-lg" data-split>De Dakar à Bordeaux.</h2>
 
         <div class="tl-grid">
@@ -467,10 +505,10 @@
       </div>
     </section>
 
-    <!-- (06) Engagement -->
+    <!-- (07) Engagement -->
     <section class="section engage" id="engagement">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>engagement</span><span class="sh__r">(06)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>engagement</span><span class="sh__r">(07)</span><span class="sh__line"></span></header>
         <div class="engage__head">
           <h2 class="h-lg" data-split>Du temps pour les autres.</h2>
           <div class="engage__intro">
@@ -535,10 +573,10 @@
       </div>
     </section>
 
-    <!-- (07) Univers -->
-    <section class="section univers" id="univers">
+    <!-- (08) Passions -->
+    <section class="section univers" id="passions">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>univers</span><span class="sh__r">(07)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>passions</span><span class="sh__r">(08)</span><span class="sh__line"></span></header>
         <h2 class="h-lg" data-split>En dehors du labo.</h2>
         <div class="acc">
           <figure class="acc__item is-default" tabindex="0">
@@ -565,10 +603,10 @@
       </div>
     </section>
 
-    <!-- (08) Mannequinat -->
+    <!-- (09) Mannequinat -->
     <section class="section mq" id="mannequinat">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>mannequinat</span><span class="sh__r">(08)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>mannequinat</span><span class="sh__r">(09)</span><span class="sh__line"></span></header>
         <div class="mq__head">
           <h2 class="h-lg" data-split>Hors du labo, devant l’objectif.</h2>
           <div class="mq__intro">
@@ -601,10 +639,10 @@
       </div>
     </section>
 
-    <!-- (09) CV -->
+    <!-- (10) CV -->
     <section class="section cvsec" id="cv">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>cv</span><span class="sh__r">(09)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>cv</span><span class="sh__r">(10)</span><span class="sh__line"></span></header>
         <div class="cvsec__grid">
           <div class="cvsec__text">
             <h2 class="h-lg" data-split>Le CV, en une page.</h2>
@@ -628,10 +666,10 @@
       </div>
     </section>
 
-    <!-- (10) Contact -->
+    <!-- (11) Contact -->
     <section class="section contact" id="contact">
       <div class="wrap">
-        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>contact</span><span class="sh__r">(10)</span><span class="sh__line"></span></header>
+        <header class="sh"><span class="sh__l"><span class="sh__ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></span>contact</span><span class="sh__r">(11)</span><span class="sh__line"></span></header>
         <h2 class="contact__big" aria-label="Travaillons ensemble."><span class="contact__line">Travaillons</span><span class="contact__line">ensemble<span class="ember-dot">.</span></span></h2>
         <div class="contact__grid">
           <div>
@@ -694,6 +732,7 @@
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/pcb.js"></script>
+  <script src="assets/js/univers.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
