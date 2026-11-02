@@ -2,7 +2,7 @@
 
 Étudiant en 3ᵉ année de BUT GEII, parcours Électronique et Systèmes Embarqués, à l’IUT de Bordeaux — en recherche d’alternance.
 
-**En ligne : https://otakufist1-ops.github.io/portfolio/** (GitHub Pages, branche `main`)
+**En ligne : https://kouthieye-thiaw.github.io/** (GitHub Pages, branche `main`)
 
 ## Contenu
 
