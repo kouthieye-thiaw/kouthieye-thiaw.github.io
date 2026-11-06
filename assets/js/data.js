@@ -19,14 +19,20 @@ window.PROJECTS = [
       { src: 'tri-7', cap: 'Ladder, réseaux 17 à 19 : pesée de 1 s (TON), comparaisons LT 450 et GT 625' },
       { src: 'tri-8', cap: 'Ladder, réseaux 20 à 24 : admission d’un seul carton par la barrière d’entrée' },
       { src: 'tri-9', cap: 'Ladder, réseaux 25 à 33 : tapis KM1 à KM5 et trieur YV1 à YV3' },
-      { src: 'tri-10', cap: 'Ladder, réseaux 34 à 37 : compteurs CTU et afficheur de poids' },
-      { src: 'tri-11', cap: 'Folio 1 · puissance : 5 départs moteur directs (sectionneur-fusible, KM1 à KM5, relais thermiques F1 à F5), moteurs couplés en étoile, disjoncteur Q4 vers la commande' },
-      { src: 'tri-12', cap: 'Folio 2 · alimentation G1 230 V AC → 24 V DC et automate Schneider M241 (TM241CE24R)' },
-      { src: 'tri-13', cap: 'Folio 3 · entrées I0 à I7 : arrêt d’urgence et Stop en NF, Start, Reset, sélecteur, capteurs PNP 3 fils' },
-      { src: 'tri-14', cap: 'Folio 4 · entrées I8 à I13 : six capteurs PNP 3 fils' },
-      { src: 'tri-15', cap: 'Folio 5 · sorties relais : arrêt d’urgence et contacts des relais thermiques F1 à F5 en série, puis bobines KM1 à KM5 et voyant H1' },
-      { src: 'tri-16', cap: 'Folio 6 · sorties transistor protégées par un fusible : trieur YV1 à YV3 et voyant H2' }
+      { src: 'tri-10', cap: 'Ladder, réseaux 34 à 37 : compteurs CTU et afficheur de poids' }
     ],
+    schema: {
+      title: 'Schéma électrique · 6 folios QElectroTech',
+      note: 'Dessiné pour un vrai automate Schneider M241 (TM241CE24R) : puissance, alimentation 24 V, entrées, sorties et chaîne de sécurité. Cliquez sur un folio pour l’agrandir.',
+      folios: [
+        { src: 'tri-11', cap: 'Folio 1 · puissance : 5 départs moteur directs (sectionneur-fusible, KM1 à KM5, relais thermiques F1 à F5), moteurs couplés en étoile, disjoncteur Q4 vers la commande' },
+        { src: 'tri-12', cap: 'Folio 2 · alimentation G1 230 V AC → 24 V DC et automate Schneider M241 (TM241CE24R)' },
+        { src: 'tri-13', cap: 'Folio 3 · entrées I0 à I7 : arrêt d’urgence et Stop en NF, Start, Reset, sélecteur, capteurs PNP 3 fils' },
+        { src: 'tri-14', cap: 'Folio 4 · entrées I8 à I13 : six capteurs PNP 3 fils' },
+        { src: 'tri-15', cap: 'Folio 5 · sorties relais : arrêt d’urgence et contacts des relais thermiques F1 à F5 en série, puis bobines KM1 à KM5 et voyant H1' },
+        { src: 'tri-16', cap: 'Folio 6 · sorties transistor protégées par un fusible : trieur YV1 à YV3 et voyant H2' }
+      ]
+    },
     figures: [
       { v: 5, u: '', l: 'étapes de Grafcet, un seul carton traité à la fois' },
       { v: 37, u: '', l: 'réseaux Ladder dans le programme final' },

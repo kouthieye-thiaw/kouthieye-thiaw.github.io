@@ -874,6 +874,19 @@
       <figure class="case__cover${isSvg ? ' case__cover--svg' : ''}" data-lb="0" data-cursor="zoom">
         <div class="case__cover-par"><img src="${src(p.cover)}" alt="${esc(p.alt || '')}"></div>
       </figure>
+      ${p.schema ? `
+      <section class="case__schema wrap" aria-label="${esc(p.schema.title)}">
+        <div class="case__schema-head" data-cr>
+          <h3 class="case__schema-title">${esc(p.schema.title)}</h3>
+          <p class="case__schema-note">${esc(p.schema.note)}</p>
+        </div>
+        <div class="case__folios">${p.schema.folios.map((f, k) => `
+          <figure class="folio" data-slb="${k}" data-cursor="zoom" data-cr>
+            <span class="folio__frame"><img src="${src(f.src)}" alt="${esc(f.cap)}" loading="lazy" decoding="async"></span>
+            <figcaption><span class="mono">folio ${k + 1} / ${p.schema.folios.length}</span>${esc(f.cap.replace(/^Folio \d+ · /, ''))}</figcaption>
+          </figure>`).join('')}
+        </div>
+      </section>` : ''}
       <div class="wrap case__grid">
         <aside class="case__aside">
           ${figs ? `<p class="mono case__aside-title" data-cr>en chiffres</p>${figs}` : `<p class="mono case__aside-title" data-cr>outils</p><div class="tags" data-cr>${tags(p.tools)}</div>`}
@@ -1466,6 +1479,11 @@
     const nx = t.closest('[data-next]');
     if (nx) { e.preventDefault(); return openCase(nx.dataset.next); }
 
+    const slbT = t.closest('[data-slb]');
+    if (slbT && caseOpen) {
+      const sc = P[caseIdx].schema;
+      if (sc) return openLB(sc.folios.map(f => ({ full: src(f.src), alt: f.cap, cap: f.cap })), +slbT.dataset.slb, slbT);
+    }
     const ulbT = t.closest('[data-ulb]');
     if (ulbT) {
       const [uid, k] = ulbT.dataset.ulb.split(':'), u = UNIV.find(x => x.id === uid);
