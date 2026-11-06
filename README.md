@@ -1,6 +1,6 @@
 # Portfolio — Kouthieye Thiaw
 
-Étudiant en 3ᵉ année de BUT GEII, parcours Électronique et Systèmes Embarqués, à l’IUT de Bordeaux — en recherche d’alternance.
+Étudiant en 3ᵉ année de BUT GEII, parcours Électronique et Systèmes Embarqués, à l’IUT de Bordeaux.
 
 **En ligne : https://kouthieye-thiaw.github.io/** (GitHub Pages, branche `main`)
 
