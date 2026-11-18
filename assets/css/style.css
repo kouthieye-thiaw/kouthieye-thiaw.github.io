@@ -907,6 +907,9 @@ html.anim [data-cr].in { opacity: 1; transform: none; }
 .learn__pb .mono { padding-top: 3px; }
 .learn__fix { color: var(--fg-2); }
 /* galerie légendée */
+.gal__item--lock { position: relative; cursor: default; }
+.gal__item--lock img { pointer-events: none; }
+.gal__lock { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; border-radius: 48px; background: rgba(0, 16, 17, .8); color: var(--bone) !important; font-size: 12px; }
 .gal__item.gal__item--cap { height: auto; overflow: visible; border-radius: 0; background: none; }
 .gal__frame { display: block; height: min(58vh, 560px); border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
 .gal__cap { display: block; width: 0; min-width: 100%; margin-top: 10px; font-size: 13px; line-height: 1.4; }

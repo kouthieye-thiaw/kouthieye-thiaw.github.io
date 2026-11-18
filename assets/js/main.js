@@ -25,6 +25,9 @@
   // une image de galerie : 'nom' ou { src: 'nom', cap: 'légende' }
   const imgName = im => typeof im === 'string' ? im : im.src;
   const imgCap = im => typeof im === 'string' ? '' : im.cap || '';
+  // image floutée et non agrandissable (cartes confidentielles)
+  const imgLock = im => typeof im === 'object' && !!im.lock;
+  const openable = p => p.images.filter(im => !imgLock(im));
   const byId = Object.fromEntries(P.map(p => [p.id, p]));
   const pad = n => String(n).padStart(2, '0');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -926,9 +929,10 @@
       ${p.images.length > 1 ? `
       <section class="case__gallery" aria-label="Galerie">
         <div class="wrap case__gallery-head"><h3 class="mono">galerie — ${p.images.length} images</h3><span class="mono">glisser ou cliquer →</span></div>
-        <div class="gal" data-cursor="glisser">${p.images.map((im, k) => imgCap(im) ? `
-          <figure class="gal__item gal__item--cap" data-lb="${k}"><span class="gal__frame"><img src="${src(imgName(im), 'sm')}" alt="${esc(imgCap(im))}" draggable="false"></span><figcaption class="gal__cap mono">${esc(imgCap(im))}</figcaption></figure>` : `
-          <figure class="gal__item" data-lb="${k}"><img src="${src(im, 'sm')}" alt="${esc(p.title)} — image ${k + 1}" draggable="false"></figure>`).join('')}
+        <div class="gal" data-cursor="glisser">${p.images.map(im => imgLock(im) ? `
+          <figure class="gal__item gal__item--lock"><img src="${src(imgName(im), 'sm')}" alt="Carte électronique floutée (confidentiel)" draggable="false"><span class="gal__lock mono">confidentiel</span></figure>` : imgCap(im) ? `
+          <figure class="gal__item gal__item--cap" data-lb="${openable(p).indexOf(im)}"><span class="gal__frame"><img src="${src(imgName(im), 'sm')}" alt="${esc(imgCap(im))}" draggable="false"></span><figcaption class="gal__cap mono">${esc(imgCap(im))}</figcaption></figure>` : `
+          <figure class="gal__item" data-lb="${openable(p).indexOf(im)}"><img src="${src(im, 'sm')}" alt="${esc(p.title)} — image ${openable(p).indexOf(im) + 1}" draggable="false"></figure>`).join('')}
         </div>
       </section>` : ''}
       <a class="case__next" href="#projet-${next.id}" data-next="${next.id}" data-cursor="suivant">
@@ -1492,7 +1496,7 @@
     const lbT = t.closest('[data-lb]');
     if (lbT && caseOpen) {
       const p = P[caseIdx];
-      return openLB(p.images.map(im => ({ full: src(imgName(im)), alt: imgCap(im) || p.title, cap: imgCap(im) })), +lbT.dataset.lb, lbT);
+      return openLB(openable(p).map(im => ({ full: src(imgName(im)), alt: imgCap(im) || p.title, cap: imgCap(im) })), +lbT.dataset.lb, lbT);
     }
 
     const opener = t.closest('[data-open]');
