@@ -68,7 +68,7 @@ window.PROJECTS = [
     short: 'Sept alimentations bas bruit « Bornus » produites et un synthétiseur de fréquence AOM à base de DDS intégré, testé et livré.',
     year: '2026', frame: 'Stage · Exail, Gradignan', duration: '7 avril – 12 juin 2026 · 10 semaines', role: 'Stagiaire en intégration électronique',
     cover: 'exail-1', alt: 'Baie électronique Exail réalisée pendant le stage',
-    images: ['exail-1', { src: 'exail-13', lock: true }, { src: 'exail-14', lock: true }, { src: 'exail-5', lock: true }, { src: 'exail-4', lock: true }, 'exail-15', 'exail-16', 'exail-7', 'exail-17', 'exail-3', { src: 'exail-18', lock: true }, { src: 'exail-19', lock: true }, { src: 'exail-20', lock: true }, 'exail-21', 'exail-22', 'exail-9', 'exail-12', 'exail-11', 'exail-10', 'exail-2', 'exail-6', { src: 'exail-8', lock: true }, 'attestation-exail'],
+    images: ['exail-1', 'exail-15', 'exail-16', 'exail-7', 'exail-17', 'exail-3', 'exail-21', 'exail-22', 'exail-9', 'exail-12', 'exail-11', 'exail-10', 'exail-2', 'exail-6', 'attestation-exail'],
     figures: [
       { v: 7, u: '', l: 'alimentations Bornus produites et validées' },
       { v: 18, p: '±', u: 'V', l: 'et ±6 V bas bruit, depuis le secteur 230 V' },
